@@ -1,26 +1,55 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
+import { useFetch } from "./useFetchHook/useFetch";
 
 export default function App() {
-  const [numbers, setNumbers] = useState([1, 2, 3]);
-  const [count, setCount] = useState(0);
-
-  // useMemo to memoize sum calculation
-  const sum = useMemo(() => {
-    console.log("Calculating sum...");
-    return numbers.reduce((a, b) => a + b, 0);
-  }, [numbers]); // only recalc when numbers change
+  const [APIv1, setAPIv1] = useState(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
+ 
+  const {data} = useFetch(APIv1);
 
   return (
-    <div style={{ textAlign: "center", marginTop: 50 }}>
-      <h2>Sum: {sum}</h2>
+    <>
+      {
+        data.map((postVal) =>
+          <p>{postVal.id}</p>
+        )
+      }
 
-      <button onClick={() => setNumbers([...numbers, 4])}>
-        Add 4
-      </button>
+    </>
+  )
 
-      <button onClick={() => setCount(count + 1)} style={{ marginLeft: 10 }}>
-        Increment Count: {count}
-      </button>
-    </div>
-  );
 }
+
+
+
+
+
+// import React, { useState } from "react";
+// import { useFetch } from "./useFetchHook/useFetch";
+
+// export default function App() {
+//   const [APIv1, setAPIv1] = useState(
+//     "https://jsonplaceholder.typicode.com/posts"
+//   );
+
+//   const { data: post, loading, error, refetch } = useFetch(APIv1);
+
+//   function handleClick() {
+//     setAPIv1("https://jsonplaceholder.typicode.com/comments");
+//   }
+
+//   return (
+//     <>
+//       {loading && <p>Loading...</p>}
+//       {error && <p>{error}</p>}
+
+//       {!loading &&
+//         post?.map((val) => <p key={val.id}>{val.title || val.name}</p>)}
+
+//       <button onClick={handleClick}>Change URL</button>
+
+//       <button onClick={refetch}>Reload</button>
+//     </>
+//   );
+// }
