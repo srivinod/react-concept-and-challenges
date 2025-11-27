@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function App() {
+export default function simpleForm() {
 
     const [name, setName] = useState(""); 
     const [error, setError] = useState(""); 
