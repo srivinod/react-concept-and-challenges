@@ -1,29 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import {SimpleForm} from './simple-form-1/simple-form';
+import { SimpleCounter } from "./simple-counter-1/simple-counter";
+import {SimpleTodo} from './simple-todo/simple-todo'
+import { ApiSample } from "./api-sample-prep/api-sample";
 
 export default function App() {
 
-    const [name, setName] = useState(""); 
-    const [error, setError] = useState(""); 
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      let formErrors = {}
-
-      if(!name.trim()){
-        formErrors.name = "Field is Required";
-        setError(formErrors);
-      }
-    }
-
-
     return (
-      <>  
-      
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Enter Name..." value={name} onChange={(e) => setName(e.target.value)} />
-            {error && error.name}
-            <button type="submit">Submit</button>
-        </form> 
-        </>
+      <>   
+      <ApiSample/>
+      </>
     )
 }
